@@ -16,8 +16,9 @@ $("#boton").click(
             {
                 Emisor = JSON.parse(JSON.stringify(emisor));
                 console.log(Emisor);
-               // validacionesLogin(Emisor);
-                
+                validacionesLogin(Emisor);
+
+
             },
                     (error) => {
                 alert(errorMessage(error.status));
@@ -26,21 +27,23 @@ $("#boton").click(
 );
 function validacionesLogin(Emisor)
 {
-    let u = Emisor.user.user;
+    let u = $("#input_idUser").val();
+    let p = $("#input_password").val();
     let d = Emisor.dni;
-    if (Emisor === null)
+    if (u === null || u==="" || p===null|| p==="" ||Emisor===null||d===undefined)
     {
         alert("Usuario o contraseña incorrectos");
-    } else if (u === "adm" && d === "adm")
+    } else
+    if (u === "adm" && p === "adm")
     {
         alert("Usuario :" + u);
         $(window).attr('location', 'view_admin.jsp');
-    }
-   /* else 
+    } else
+    if(d!==undefined)
     {
-        alert(Emisor);
-       // $(window).attr('location', 'view_principal.jsp');
-    }*/
+        alert(d);
+       $(window).attr('location', 'view_principal.jsp');
+    }
 }
 function errorMessage(status) {
     switch (status) {

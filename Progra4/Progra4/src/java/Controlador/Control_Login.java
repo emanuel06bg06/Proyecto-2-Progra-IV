@@ -36,12 +36,15 @@ public class Control_Login extends HttpServlet {
             User u = dao.validate(x.getUser(), x.getPass());
             DAO_Emisor dao_e = new DAO_Emisor();
             Emisor emisor = dao_e.search(x.getUser());
-            PrintWriter out = response.getWriter();
-            response.setContentType("application/json; charset=UTF-8");
-            //if(emisor==null)
-            //request.getSession(true).setAttribute("usuario", emisor);
-             out.write(gson.toJson(emisor));
-            response.setStatus(200); // ok with content
+            if (emisor != null) {
+                PrintWriter out = response.getWriter();
+                response.setContentType("application/json; charset=UTF-8");
+                request.getSession(true).setAttribute("usuario", emisor);
+                out.write(gson.toJson(emisor));
+                response.setStatus(200); // ok with content
+                HttpSession session = request.getSession();
+                session.setAttribute("emisor", emisor);
+            }
         } catch (JsonIOException | JsonSyntaxException | IOException e) {
             response.setStatus(status(e));
         }
