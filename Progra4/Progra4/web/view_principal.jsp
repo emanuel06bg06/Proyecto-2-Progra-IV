@@ -1,15 +1,17 @@
 <%@page import="Modelo.Emisor"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
+
 <!DOCTYPE html>
 <html>
-    <head>        
+    <head>     
+          <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link href="css/main.css" rel="stylesheet" type="text/css"/>
         <link href="css/view_principal.css" rel="stylesheet" type="text/css"/>
-        <link href='https://fonts.googleapis.com/css?family=Bad Script' rel='stylesheet'>
-        <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
-        <title>Sistema de Facturación</title>
+               <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <title>Sistema d +e Facturación</title>
     </head>
     <body>
         <%@include file="encabezado.jsp" %>

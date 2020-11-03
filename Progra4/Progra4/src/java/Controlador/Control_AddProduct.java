@@ -4,7 +4,11 @@ import DAO.DAO_Product;
 import Model.List.List_category;
 import Modelo.Producto;
 import Modelo.Emisor;
+import Modelo.User;
+import com.google.gson.Gson;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,18 +20,25 @@ public class Control_AddProduct extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String detail = request.getParameter("detail");
+        BufferedReader reader = request.getReader();
+        Gson gson = new Gson();
         int category = Integer.valueOf(request.getParameter("category"));
-        float price = Float.valueOf(request.getParameter("price"));
+        Producto p = gson.fromJson(reader, Producto.class);
         DAO_Product dao = new DAO_Product();
         HttpSession session = request.getSession(false);
         if (session != null) {
             Emisor emisor = (Emisor) session.getAttribute("emisor");
             if (emisor != null) {
                 List_category categories = (List_category) session.getAttribute("categories");
-                Producto product = new Producto(-1, detail, price, categories.get(category));
-                if (dao.create(product, emisor.getDni())) {
+                Producto producto = new Producto(p.getId(), p.getDetail(), p.getPrice(), categories.get(category));
+                if (dao.create(producto, emisor.getDni())) {
                     response.sendRedirect("mensajes.jsp?msj=Ingresado&link=view_addProduct.jsp");
+                    PrintWriter out = response.getWriter();
+                    response.setContentType("application/json; charset=UTF-8");
+                    out.write(gson.toJson(producto));
+                    response.setStatus(200); // ok with content
+                    request.getSession(true).setAttribute("usuario", emisor);
+
                 } else {
                     response.sendRedirect("mensajes.jsp?msj=No se pudo relacionar su producto a su cuenta"
                             + "&link=view_addProduct.jsp");
@@ -39,6 +50,16 @@ public class Control_AddProduct extends HttpServlet {
         } else {
             response.sendRedirect("mensajes.jsp?msj=Error en sesion&link=view_addProduct.jsp");
         }
+    }
+
+    protected int status(Exception e) {
+        if (e.getMessage().startsWith("404")) {
+            return 404;
+        }
+        if (e.getMessage().startsWith("406")) {
+            return 406;
+        }
+        return 400;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

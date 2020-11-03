@@ -22,7 +22,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 public class Control_Login extends HttpServlet {
 
     /*   */
@@ -50,38 +49,7 @@ public class Control_Login extends HttpServlet {
         }
     }
 
-    protected void login(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        /* 
-                        DAO_Emisor dao_e = new DAO_Emisor();
-                        Emisor emisor = dao_e.search(user.getUser());
-                        if (emisor != null) {
-                            HttpSession session = request.getSession();
-                            session.setAttribute("emisor", emisor);
-                            request.getRequestDispatcher("view_principal.jsp").forward(request, response);
-                        } else {
-                            response.sendRedirect("index.jsp");
-                        }
-                    }
-                } else {
-                    response.sendRedirect("view_admin.jsp");
-                }
-            } else {
-                request.getRequestDispatcher("view_singin.jsp").forward(request, response);
-            }*/
-        try {
-            BufferedReader reader = request.getReader();
-            Gson gson = new Gson();
-            User x = gson.fromJson(reader, User.class);
-            PrintWriter out = response.getWriter();
-            //List<User> personas = Model.instance().personaSearch(persona.getNombre());
-            response.setContentType("application/json; charset=UTF-8");
-            out.write(gson.toJson(x));
-            response.setStatus(200); // ok with content
-        } catch (JsonIOException | JsonSyntaxException | IOException e) {
-            response.setStatus(status(e));
-        }
-    }
+    
 
     protected int status(Exception e) {
         if (e.getMessage().startsWith("404")) {

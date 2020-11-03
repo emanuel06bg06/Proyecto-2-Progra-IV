@@ -5,6 +5,7 @@
  */
 
 console.log("activo!!!!!");
+//LOGIN
 $("#boton").click(
         function login() {
             Ubication = {idUbication: 0, province: "", canton: "", distrito: "", address: ""};
@@ -25,12 +26,38 @@ $("#boton").click(
             });
         }
 );
+
+//REGISTRAR PRODUCTO
+$("#bnt_addProduct").click(
+        function agregarProducto() {
+
+            var categoria = $("#categoria").val();
+            //numeroCategoria=5;
+            Categoria = {descripcion: "", iva: 0};
+            Producto = {id: 5, detail: $("#txt_detail").val(), price: $("#txt_price").val(), Categoria};
+
+
+            $.ajax({type: "POST", url: "Control_AddProduct", data: JSON.stringify(Producto),
+                // lo que devuelve el servlet
+                contentType: "application/json"}).then((producto) =>
+            {
+                Producto = JSON.parse(JSON.stringify(producto));
+                alert(Producto.detail);
+                // validacionesEspacios en blanco;
+
+
+            },
+                    (error) => {
+                alert(errorMessage(error.status));
+            });
+        }
+);
 function validacionesLogin(Emisor)
 {
     let u = $("#input_idUser").val();
     let p = $("#input_password").val();
     let d = Emisor.dni;
-    if (u === null || u==="" || p===null|| p==="" ||Emisor===null||d===undefined)
+    if (u === null || u === "" || p === null || p === "" || Emisor === null || d === undefined)
     {
         alert("Usuario o contraseña incorrectos");
     } else
@@ -39,12 +66,50 @@ function validacionesLogin(Emisor)
         alert("Usuario :" + u);
         $(window).attr('location', 'view_admin.jsp');
     } else
-    if(d!==undefined)
+    if (d !== undefined)
     {
         alert(d);
-       $(window).attr('location', 'view_principal.jsp');
+        $(window).attr('location', 'view_principal.jsp');
     }
 }
+
+$("#logout").click(
+        function logout() {
+          X = {descripcion: "OK", iva: 0};
+          
+            $.ajax({type: "POST", url:"Control_Admin",
+                data: JSON.stringify(X),
+                // lo que devuelve el servlet
+                contentType: "application/json"}
+               ).then((c) =>
+            {
+                X  = JSON.parse(JSON.stringify(c));
+                console.log(X);
+                $(window).attr('location', 'index.jsp');
+           }
+                 );
+        }
+);
+
+$("#UsuariosAdm").click(
+        function verUsuarios() {
+          X = {descripcion: "OK", iva: 0};
+          
+            $.ajax({type: "POST", url:"Control_Admin_Ver_Usuarios",
+                data: JSON.stringify(X),
+                // lo que devuelve el servlet
+                contentType: "application/json"}
+               ).then((c) =>
+            {
+                console.log(X);
+                X  = JSON.parse(JSON.stringify(c));
+                console.log(X);
+                $(window).attr('location', 'view_users.jsp');
+           }
+                 );
+        }
+);
+
 function errorMessage(status) {
     switch (status) {
         case 404:
@@ -57,4 +122,8 @@ function errorMessage(status) {
         default:
             return "Error: " + status;
     }
+}
+function cargarProductos()
+{
+    //retorna la lista seleccionable con los productos cargados desde la base
 }

@@ -10,12 +10,11 @@
     </head>
     <body>        
         <h1>Administrador</h1>
-        <form action="Control_Admin" method="POST">
-            <input type="submit" name="option" value="Ver Usuarios">
-            <input type="submit" name="option" value="Logout">
+        <form action="" method="POST">
+            <input type="button"  value="Ver Usuarios" id="UsuariosAdm" >
+            <input type="button"  value="Logout" id="logout">
         </form>
         <script src= "js/principal.js"></script>
-
 
     </body>
 </html>

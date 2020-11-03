@@ -2,7 +2,12 @@ package Controlador;
 
 import DAO.DAO_User;
 import Model.List.List_Users;
+import Modelo.Category;
+import Modelo.User;
+import com.google.gson.Gson;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,24 +28,10 @@ public class Control_Admin extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String option = request.getParameter("option");
         HttpSession session = request.getSession(false);
         if (session != null) {
-            switch (option) {
-                case "Ver Usuarios":
-                    DAO_User daoU = new DAO_User();
-                    List_Users usuarios = daoU.read();
-                    if (usuarios.getUsuarios().size() > 0) {
-                        session.setAttribute("usuarios", usuarios);
-                        request.getRequestDispatcher("view_users.jsp").forward(request, response);
-                    }
-                    break;
-                case "Logout":
-                    request.getSession(false).invalidate();
-                    response.sendRedirect("index.jsp");
-                default:
-                    break;
-            }
+            request.getSession(false).invalidate();
+            // response.sendRedirect("index.jsp");
         }
     }
 

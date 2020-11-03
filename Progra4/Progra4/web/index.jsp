@@ -6,9 +6,7 @@
         <title>Sistema de Facturación</title>        
         <link href="css/main.css" rel="stylesheet" type="text/css"/>
         <link href="css/index.css" rel="stylesheet" type="text/css"/>
-        <link href='https://fonts.googleapis.com/css?family=Bad Script' rel='stylesheet'>
-        <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>     
-       <link rel="shortcut icon" href="#">
+          <link rel="shortcut icon" href="#">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
