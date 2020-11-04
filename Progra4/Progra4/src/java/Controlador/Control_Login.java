@@ -22,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 public class Control_Login extends HttpServlet {
 
     /*   */
@@ -41,6 +42,7 @@ public class Control_Login extends HttpServlet {
                 request.getSession(true).setAttribute("usuario", emisor);
                 out.write(gson.toJson(emisor));
                 response.setStatus(200); // ok with content
+                
                 HttpSession session = request.getSession();
                 session.setAttribute("emisor", emisor);
             }
@@ -48,8 +50,6 @@ public class Control_Login extends HttpServlet {
             response.setStatus(status(e));
         }
     }
-
-    
 
     protected int status(Exception e) {
         if (e.getMessage().startsWith("404")) {
