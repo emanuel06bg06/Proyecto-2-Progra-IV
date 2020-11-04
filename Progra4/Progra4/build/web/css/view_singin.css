@@ -4,6 +4,7 @@ html,body{
 }
 
 body{
-    background-image: url(../img/registrar.jpg) !important;
+    background-image: url(../img/background.jpg) !important;
     background-repeat: no-repeat;
+    background-attachment: fixed
 }

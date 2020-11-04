@@ -6,6 +6,7 @@
         <title>Sistema de Facturación</title>        
         <link href="css/main.css" rel="stylesheet" type="text/css"/>
         <link href="css/index.css" rel="stylesheet" type="text/css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>      
     </head>
@@ -27,7 +28,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="input_password">Contraseña:</label><br>
-                                    <input type="text" name="input_password" id="input_password" class="form-control">
+                                    <input type="password" name="input_password" id="input_password" class="form-control">
                                 </div>
 
                                 <div class="form-group">                    

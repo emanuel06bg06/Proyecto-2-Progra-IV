@@ -55,5 +55,7 @@ header > form > input{
     margin: 50px auto;
     border-style: groove;
     padding: 20px;
-   background-color: #283966;
+   background-color: #EAEAEA;
+   color:#555;
+   opacity: 0.7;
 }
