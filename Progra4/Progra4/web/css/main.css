@@ -4,13 +4,21 @@ html,body{
 }
 
 body{
-    background-image: url(../img/background.png);
-    background-repeat: no-repeat;
+    background-image: url(../img/background.jpg);
+   
 }
-
+.header {
+  overflow: hidden;
+  background-color: #EAEAEA;
+  padding: 20px 10px;
+  color:#555;
+  font-family:verdana;
+text-align: center;
+opacity: 0.5;
+}
 label{
     font-size: 20px;
-    color: #7892c2;
+    color: #555;
     font-family: 'Bad Script';
     font-weight: bolder;
 }
@@ -47,5 +55,5 @@ header > form > input{
     margin: 50px auto;
     border-style: groove;
     padding: 20px;
-    background-color: wheat;
+   background-color: #283966;
 }

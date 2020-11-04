@@ -1,16 +1,27 @@
-#div_index{
-    width: 550px;
-    margin: 100px auto;
-    background-color: bisque;
-    padding: 10px;
-    text-align: center;
-    padding-top: 40px;
-}
 
-#input_idUser{
-    margin-left: 60px;
-}
 
-#input_password{
-    margin-left: 10px;
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  
+}
+#div_index .container #login-row #login-column #login-box {
+  margin-top: 120px;
+  max-width: 600px;
+  height: 320px;
+  border: 1px solid #9C9C9C;
+  background-color: #EAEAEA;
+  opacity: 0.7;
+ 
+}
+#div_index .container #login-row #login-column #login-box #login-form {
+  padding: 10px;
+  
+  
+}
+#div_index .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: -75px;
+  
 }
