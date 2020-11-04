@@ -16,11 +16,11 @@ $("#boton").click(
                 contentType: "application/json"}).then((emisor) =>
             {
                 Emisor = JSON.parse(JSON.stringify(emisor));
-                console.log(Emisor);
+             
+
+              
                 validacionesLogin(Emisor);
-
-
-            },
+ },
                     (error) => {
                 alert(errorMessage(error.status));
             });
@@ -44,9 +44,7 @@ $("#bnt_addProduct").click(
                 Producto = JSON.parse(JSON.stringify(producto));
                 alert(Producto.detail);
                 // validacionesEspacios en blanco;
-
-
-            },
+  },
                     (error) => {
                 alert(errorMessage(error.status));
             });
@@ -54,59 +52,80 @@ $("#bnt_addProduct").click(
 );
 function validacionesLogin(Emisor)
 {
-    let u = $("#input_idUser").val();
-    let p = $("#input_password").val();
-    let d = Emisor.dni;
-    if (u === null || u === "" || p === null || p === "" || Emisor === null || d === undefined)
+    var s, r, u, p = 0;
+      
+                
+    u = $("#input_idUser").val();
+    p = $("#input_password").val();
+
+    if (u === "" || p === "")
     {
-        alert("Usuario o contraseña incorrectos");
+        alert("rellene los campos");
     } else
-    if (u === "adm" && p === "adm")
+    //usuario inexistente
+    if (Emisor.user === undefined)
     {
-        alert("Usuario :" + u);
+        alert("El usuario solicitado no existe verifique su clave o contraseña");
+    } else
+           if(Emisor!==undefined)
+    {
+                if (Emisor.user.user === "adm" && Emisor.dni === "adm")
+                {
+                    Emisor.user.rol = 0;
+                    Emisor.user.status=1;
+           
+                }
+        r = Emisor.user.rol;
+    s = Emisor.user.status;
+    //caso usuario administrador
+    if (s===1 &&r === 0)
+    {
         $(window).attr('location', 'view_admin.jsp');
-    } else
-    if (d !== undefined)
-    {
-        alert(d);
-        $(window).attr('location', 'view_principal.jsp');
-    }
+    } else 
+    //caso usuario normal
+    // verificar que sea adm
+     
+
+    if (r === 1)
+    {//caso usuario normal sin habilitar
+        if (s === 0)
+        {
+            alert("El usuario solicitado debe ser habilitado");
+        } else
+        {
+            $(window).attr('location', 'view_principal.jsp');
+        }
+    }}
 }
 
 $("#logout").click(
         function logout() {
-          X = {descripcion: "OK", iva: 0};
-          
-            $.ajax({type: "POST", url:"Control_Admin",
-                data: JSON.stringify(X),
-                // lo que devuelve el servlet
-                contentType: "application/json"}
-               ).then((c) =>
+
+
+            $.ajax({type: "POST", url: "Control_Admin"}).then(() =>
             {
-                X  = JSON.parse(JSON.stringify(c));
-                console.log(X);
                 $(window).attr('location', 'index.jsp');
-           }
-                 );
+            }
+            );
         }
 );
 
 $("#UsuariosAdm").click(
         function verUsuarios() {
-          X = {descripcion: "OK", iva: 0};
-          
-            $.ajax({type: "POST", url:"Control_Admin_Ver_Usuarios",
+            X = {descripcion: "OK", iva: 0};
+
+            $.ajax({type: "POST", url: "Control_Admin_Ver_Usuarios",
                 data: JSON.stringify(X),
                 // lo que devuelve el servlet
                 contentType: "application/json"}
-               ).then((c) =>
+            ).then((c) =>
             {
                 console.log(X);
-                X  = JSON.parse(JSON.stringify(c));
+                X = JSON.parse(JSON.stringify(c));
                 console.log(X);
                 $(window).attr('location', 'view_users.jsp');
-           }
-                 );
+            }
+            );
         }
 );
 
