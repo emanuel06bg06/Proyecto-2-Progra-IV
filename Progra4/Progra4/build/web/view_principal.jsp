@@ -11,7 +11,7 @@
         <link href="css/view_principal.css" rel="stylesheet" type="text/css"/>
                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-        <title>Sistema d +e Facturación</title>
+        <title>Sistema de Facturación</title>
     </head>
     <body>
         <%@include file="encabezado.jsp" %>
