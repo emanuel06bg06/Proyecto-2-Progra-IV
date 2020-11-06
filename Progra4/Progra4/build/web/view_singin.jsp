@@ -45,7 +45,7 @@
                     <label for="user"  >Nombre de usuario</label>
                     <input type="text" id="user" name="user" class="form-control"  placeholder="Ingrese un nombre de usuario">
                     <label for="pass"  >Contraseña</label>
-                    <input type="text" class="form-control"  name="pass" placeholder="Ingrese una contraseña">
+                    <input type="password" class="form-control"  name="pass" placeholder="Ingrese una contraseña">
                     <input type="submit" class="btn btn-primary" value="Registrarse">
                     <a class="btn btn-link"  href="index.jsp">Volver al inicio</a>                    
             </div>
