@@ -7,8 +7,8 @@
         <title>Sistema de Facturación</title>
         <link href="css/main.css" rel="stylesheet" type="text/css"/>
         <link href="css/view_add_client.css" rel="stylesheet" type="text/css"/>
-        <link href='https://fonts.googleapis.com/css?family=Bad Script' rel='stylesheet'>
-        <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> 
     </head>
     <body>
         <%@include file="encabezado.jsp" %>
@@ -22,10 +22,11 @@
             </div>
             <div id="div_form_add_cliente">
                 <form action="Control_AddClient" method="POST">
-                    <div>
+                    <div class="form-group">>
                         <span>
-                            <label for="select_tipoId" class="element_form">Tipo de identificación</label>
-                            <select id="select_tipoId" name="type_id" value="Tipo de identificación" class="element_form">
+                            
+                            <label for="select_tipoId" Tipo de identificación</label>
+                            <select id="select_tipoId"  class="form-control" name="type_id" value="Tipo de identificación" class="element_form">
                                 <option value="1">Física</option>
                                 <option value="2">Jurídica</option>
                             </select>
