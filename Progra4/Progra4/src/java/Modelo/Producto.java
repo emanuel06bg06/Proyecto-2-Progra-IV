@@ -25,6 +25,14 @@ public class Producto implements Serializable {
         this.category = category;
         this.cantidad = 0;
     }
+     public Producto(int id, String detail, float price, Category category,int cantidad) {
+        this.id = id;
+        this.detail = detail;
+        this.price = price;
+        this.category = category;
+        this.cantidad = 0;
+        
+    }
 
     public int getId() {
         return id;

@@ -16,11 +16,8 @@ $("#boton").click(
                 contentType: "application/json"}).then((emisor) =>
             {
                 Emisor = JSON.parse(JSON.stringify(emisor));
-             
-
-              
                 validacionesLogin(Emisor);
- },
+            },
                     (error) => {
                 alert(errorMessage(error.status));
             });
@@ -31,30 +28,28 @@ $("#boton").click(
 $("#bnt_addProduct").click(
         function agregarProducto() {
 
-            var categoria = $("#categoria").val();
-            //numeroCategoria=5;
-            Categoria = {descripcion: "", iva: 0};
-            Producto = {id: 5, detail: $("#txt_detail").val(), price: $("#txt_price").val(), Categoria};
-
-
-            $.ajax({type: "POST", url: "Control_AddProduct", data: JSON.stringify(Producto),
-                // lo que devuelve el servlet
-                contentType: "application/json"}).then((producto) =>
+            d = $("#selectProductos option:selected").text();
+            x = $("#selectProductos option:selected").val();
+            Auxiliar = {id: 0, detail: $("#txt_detail").val(), price: $("#txt_price").val(), iva: x, descripcion: d};
+            console.log(Auxiliar);
+            $.ajax({type: "POST", url: "Control_AddProduct", data: JSON.stringify(Auxiliar),
+                contentType: "application/json"}).then((p) =>
             {
-                Producto = JSON.parse(JSON.stringify(producto));
-                alert(Producto.detail);
-                // validacionesEspacios en blanco;
-  },
+                //Auxiliar = JSON.parse(JSON.stringify(a));
+                console.log(p);
+
+            },
                     (error) => {
                 alert(errorMessage(error.status));
             });
+
         }
 );
 function validacionesLogin(Emisor)
 {
     var s, r, u, p = 0;
-      
-                
+
+
     u = $("#input_idUser").val();
     p = $("#input_password").val();
 
@@ -67,35 +62,36 @@ function validacionesLogin(Emisor)
     {
         alert("El usuario solicitado no existe verifique su clave o contraseña");
     } else
-           if(Emisor!==undefined)
+    if (Emisor !== undefined)
     {
-                if (Emisor.user.user === "adm" && Emisor.dni === "adm")
-                {
-                    Emisor.user.rol = 0;
-                    Emisor.user.status=1;
-           
-                }
-        r = Emisor.user.rol;
-    s = Emisor.user.status;
-    //caso usuario administrador
-    if (s===1 &&r === 0)
-    {
-        $(window).attr('location', 'view_admin.jsp');
-    } else 
-    //caso usuario normal
-    // verificar que sea adm
-     
+        if (Emisor.user.user === "adm" && Emisor.dni === "adm")
+        {
+            Emisor.user.rol = 0;
+            Emisor.user.status = 1;
 
-    if (r === 1)
-    {//caso usuario normal sin habilitar
-        if (s === 0)
-        {
-            alert("El usuario solicitado debe ser habilitado");
-        } else
-        {
-            $(window).attr('location', 'view_principal.jsp');
         }
-    }}
+        r = Emisor.user.rol;
+        s = Emisor.user.status;
+        //caso usuario administrador
+        if (s === 1 && r === 0)
+        {
+            $(window).attr('location', 'view_admin.jsp');
+        } else
+        //caso usuario normal
+        // verificar que sea adm
+
+
+        if (r === 1)
+        {//caso usuario normal sin habilitar
+            if (s === 0)
+            {
+                alert("El usuario solicitado debe ser habilitado");
+            } else
+            {
+                $(window).attr('location', 'view_principal.jsp');
+            }
+        }
+    }
 }
 
 $("#logout").click(
@@ -142,7 +138,22 @@ function errorMessage(status) {
             return "Error: " + status;
     }
 }
-function cargarProductos()
-{
-    //retorna la lista seleccionable con los productos cargados desde la base
-}
+
+var cargarListaProductos = (function () {
+    lista_productos = {descripcion: "",
+        iva: 0.13};
+    $.ajax({type: "POST", url: "Control_Productos"}).then((lista) =>
+    {
+        lista_productos = JSON.parse(JSON.stringify(lista));
+
+        for (var item in lista_productos) {
+            optionText = lista_productos[item].descripcion;
+            optionValue = lista_productos[item].iva;
+            //console.log(optionValue);
+            $('#selectProductos').append($('<option>').val(optionValue).text(optionText));
+        }
+    },
+            (error) => {
+        alert(errorMessage(error.status));
+    });
+}());
