@@ -5,13 +5,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Sistema de Facturación</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-   
         <link href="css/main.css" rel="stylesheet" type="text/css"/>
         <link href="css/view_add_client.css" rel="stylesheet" type="text/css"/>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> 
-           </head>
+    </head>
     <body>
         <%@include file="encabezado.jsp" %>
         <%
@@ -23,7 +21,7 @@
                 <h1>Agregar Cliente</h1>
             </div>
             <div id="div_form_add_cliente">
-                <form action="" method="POST">
+                <form action="Control_AddClient" method="POST">
                     <div class="form-group">>
                         <span>
                             
@@ -61,7 +59,7 @@
                         <input id="input_dir" class="element_form"  type="text" name="address" placeholder="Direccion (Opcional)">  
                     </div>
                     <div>
-                        <input id="Agregar" type="button" value="Agregar">                    
+                        <input type="submit" value="Agregar">                    
                         <a href="view_principal.jsp">Volver a la página principal</a>
                     </div>
                     <% } else {
@@ -70,7 +68,6 @@
                     %>
                 </form>
             </div>
-        </div> <script src="js/principal.js"></script>
-                 
+        </div>
     </body>
 </html>
