@@ -23,20 +23,20 @@
             <h1>Lista de clientes</h1>
             <div id="div_listC">  
                 <form action="Control_Fac_C" method="GET">
-                    <div id=div_table">
-                        <table border="1">
-                            <thead>
+                    <div id=div_table>
+                        <table class="table">
+                            <thead class="thead-dark">
                                 <tr>
-                                    <th>Tipo de identificación</th>
-                                    <th>Número de cédula</th>
-                                    <th>Nombre completo</th>
-                                    <th>Número de teléfono</th>
-                                    <th>E-Mail</th>
-                                    <th>Provincia</th>
-                                    <th>Cantón</th>
-                                    <th>Distrito</th>
-                                    <th>Dirección</th>
-                                    <th></th>
+                                    <th scope="col">Tipo de identificación</th>
+                                    <th scope="col">Número de cédula</th>
+                                    <th scope="col">Nombre completo</th>
+                                    <th scope="col">Número de teléfono</th>
+                                    <th scope="col">E-Mail</th>
+                                    <th scope="col">Provincia</th>
+                                    <th scope="col">Cantón</th>
+                                    <th scope="col">Distrito</th>
+                                    <th scope="col">Dirección</th>
+                                    <th scope="row"></th>
                                 </tr>
                             </thead>
                             <tbody>

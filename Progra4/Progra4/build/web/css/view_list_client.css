@@ -1,7 +1,7 @@
 #div_listC{
     border-style: groove;
     padding: 20px;
-    background-color: wheat;
+    background-color: #EAEAEA;
 }
 #div_principal{
     text-align: center;
@@ -9,7 +9,7 @@
     margin: 50px auto;
     border-style: groove;
     padding: 20px;
-    background-color: wheat;
+    background-color: #EAEAEA;
 }
 
 #div_table{
