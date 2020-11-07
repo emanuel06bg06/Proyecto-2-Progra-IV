@@ -4,10 +4,15 @@ package Controlador;
 import DAO.DAO_Emisor;
 import DAO.DAO_Ubication;
 import DAO.DAO_User;
+import Modelo.Auxiliar;
+import Modelo.AuxiliarEmisor;
 import Modelo.Emisor;
 import Modelo.Ubication;
 import Modelo.User;
+import com.google.gson.Gson;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Arrays;
@@ -24,29 +29,22 @@ public class ControlRegistrar extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            int type_id = Integer.valueOf(request.getParameter("type_id"));
-            String num_id = request.getParameter("dni");
-            String name_full = request.getParameter("name");
-            String num_tel = request.getParameter("num_tel");
-            String mail = request.getParameter("mail");
-            String tradename = request.getParameter("tradename");
-            String user = request.getParameter("user");
-            String pass = request.getParameter("pass");
-            String province = request.getParameter("province");
-            String canton = request.getParameter("canton");
-            String district = request.getParameter("district");
-            String address = "";
+            BufferedReader reader = request.getReader();
+            Gson gson = new Gson();
+             AuxiliarEmisor a = gson.fromJson(reader,  AuxiliarEmisor.class);
+          
+          /* 
             if (num_id == "" || name_full == "" || num_tel == "" || mail == ""
                     || tradename == "" || user == "" || pass == "" || province == "") {
                 String msj = "Todos los campos deben ser rellenados";
                 response.sendRedirect(String.format("mensajes.jsp?msj=%s", msj));
-            } else {
+            } else {*/
                 Emisor emisor = new Emisor(
-                        tradename,
-                        new User(user, pass),
-                        null, num_id, name_full, num_tel, mail, type_id,
+                       a.getTradename(),
+                        new User( a.getUser(), a.getPass()),
+                        null, a.getNum_id(), a.getName_full(),a.getNum_tel(), a.getMail(),a.getType_id(),
                         new Ubication(
-                                0, province, canton, district, address)
+                                0, a.getProvince(), a.getCanton(),a.getDistrict(), a.getAddress())
                 );
                 DAO_Ubication ubi = new DAO_Ubication();
                 if (ubi.create(emisor.getLocation())) {
@@ -54,30 +52,34 @@ public class ControlRegistrar extends HttpServlet {
                     if (i_u.create(emisor.getUser())) {
                         DAO_Emisor emi = new DAO_Emisor();
                         if (emi.create(emisor)) {
-                            response.sendRedirect("mensajes.jsp?msj=Registro completo");
+                            PrintWriter out = response.getWriter();
+                            response.setContentType("application/json; charset=UTF-8");
+                            out.write(gson.toJson(a));
+                            response.setStatus(200); // ok with content
+                           // response.sendRedirect("mensajes.jsp?msj=Registro completo");
                         } else {
-                            i_u.delete(user);
-                            response.sendRedirect("mensajes.jsp?msj=Error al registrar la info");
+                            i_u.delete(a.getUser());
+                            //response.sendRedirect("mensajes.jsp?msj=Error al registrar la info");
                         }
                     } else {
-                        response.sendRedirect("mensajes.jsp?msj=Error al registrar el user");
+                       // response.sendRedirect("mensajes.jsp?msj=Error al registrar el user");
                     }
                 } else {
-                    response.sendRedirect("mensajes.jsp?msj=Error al registrar el usuario");
+                   // response.sendRedirect("mensajes.jsp?msj=Error al registrar el usuario");
                 }
-            }
+            
         } catch (NumberFormatException ex) {
             String msj = "Todos los campos deben ser rellenados";
             response.sendRedirect(String.format("mensajes.jsp?msj=%s", msj));
             System.err.println(Arrays.toString(ex.getStackTrace()));
         } catch (IOException | SQLException ex) {
             if (ex instanceof SQLIntegrityConstraintViolationException) {
-                response.sendRedirect("mensajes.jsp?msj=El usuario ya existe&&link=index.jsp");
+               // response.sendRedirect("mensajes.jsp?msj=El usuario ya existe&&link=index.jsp");
             }
-            Logger.getLogger(ControlRegistrar.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
+          Logger.getLogger(ControlRegistrar.class.getName()).log(Level.SEVERE, null, ex);  
+}
+    
+}
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

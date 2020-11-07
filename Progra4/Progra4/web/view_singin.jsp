@@ -9,13 +9,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     </head>
     <body>
         <div class="div_centrado">
             <h1>Registro</h1>
             <div class="form-group">
-                <form action="Control_Signin" method="POST">                                                            
+                <form action="" method="POST">                                                            
                     <label for="select_tipoId" >Tipo de identificación</label>
                     <select id="select_tipoId" name="type_id" value="Tipo de identificación" class="form-control">
                         <option value="1">Física</option>
@@ -45,15 +46,17 @@
                     <label for="user"  >Nombre de usuario</label>
                     <input type="text" id="user" name="user" class="form-control"  placeholder="Ingrese un nombre de usuario">
                     <label for="pass"  >Contraseña</label>
-                    <input type="password" class="form-control"  name="pass" placeholder="Ingrese una contraseña">
-                    <input type="submit" class="btn btn-primary" value="Registrarse">
+                    <input id="password"type="password" class="form-control"  name="pass" placeholder="Ingrese una contraseña">
+                    <input type="button" class="btn btn-primary" value="Registrarse" id="Registrarse">
                     <a class="btn btn-link"  href="index.jsp">Volver al inicio</a>                    
             </div>
 
 
         </form>
     </div>
-
+    <script src="js/principal.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      
 </body>
 </html>
 
