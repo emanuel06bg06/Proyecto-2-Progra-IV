@@ -32,7 +32,7 @@ form>div,div>h1{
 #div_form_add_cliente{
     border-style: groove;
     padding: 20px;
-    background-color: wheat;
+    background-color: #EAEAEA;
 }
 .div_centrado{
     width: 800px !important;
