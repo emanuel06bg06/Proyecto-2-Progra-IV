@@ -1,13 +1,21 @@
 package Controlador;
 
+import DAO.DAO_Emisor;
 import DAO.DAO_Person;
 import DAO.DAO_Ubication;
+import DAO.DAO_User;
+import Modelo.AuxiliarEmisor;
 import Modelo.Person;
 import Modelo.Emisor;
 import Modelo.Ubication;
+import Modelo.User;
+import com.google.gson.Gson;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -20,52 +28,57 @@ public class Control_AddClient extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        int type_id = Integer.valueOf(request.getParameter("type_id"));
-        String num_id = request.getParameter("dni");
-        String name_full = request.getParameter("name");
-        String num_tel = request.getParameter("num_tel");
-        String mail = request.getParameter("mail");
-        String province = request.getParameter("province");
-        String canton = request.getParameter("canton");
-        String district = request.getParameter("district");
-        String address = request.getParameter("address");
-        if (num_id.equals("") || name_full.equals("") || num_tel.equals("")
-                || mail.equals("") || province.equals("")) {
-            String msj = "Todos los campos deben ser rellenados";
-            response.sendRedirect(String.format("mensajes.jsp?error=%s", msj));
-        } else {
-            HttpSession session = request.getSession(false);
-            Ubication ubication = new Ubication(0, province, canton, district, address);
-            if (session != null) {
-                Emisor emisor = (Emisor) session.getAttribute("emisor");
-                if (emisor != null) {
-                    try {
-                        DAO_Ubication dao_u = new DAO_Ubication();
-                        if (dao_u.create(ubication)) {
-                            DAO_Person dao = new DAO_Person();
-                            if (dao.create(new Person(
-                                    num_id, name_full, num_tel, mail, type_id, ubication),
-                                    emisor.getDni())) {
-                                response.sendRedirect("mensajes.jsp?msj=Registro completo&link=view_add_client.jsp");
-                            } else {
-                                response.sendRedirect("mensajes.jsp?msj=No se pudo registrar al cliente&link=view_add_client.jsp");
-                            }
-                        } else {
-                            response.sendRedirect("mensajes.jsp?msj=No se pudo registrar al cliente&link=view_add_client.jsp");
-                        }
-                    } catch (SQLException ex) {
-                        if (ex instanceof SQLIntegrityConstraintViolationException) {
-                            response.sendRedirect("mensajes.jsp?msj=El cliente ya existe&&link=view_add_client.jsp");
-                        }
-                        Logger.getLogger(Control_AddClient.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            BufferedReader reader = request.getReader();
+            Gson gson = new Gson();
+            AuxiliarEmisor a = gson.fromJson(reader, AuxiliarEmisor.class);
+            /* 
+            if (num_id == "" || name_full == "" || num_tel == "" || mail == ""
+                    || tradename == "" || user == "" || pass == "" || province == "") {
+                String msj = "Todos los campos deben ser rellenados";
+                response.sendRedirect(String.format("mensajes.jsp?msj=%s", msj));
+            } else {*/
+            Emisor emisor = new Emisor(
+                    a.getTradename(),
+                    new User(a.getUser(), a.getPass()),
+                    null, a.getNum_id(), a.getName_full(), a.getNum_tel(), a.getMail(), a.getType_id(),
+                    new Ubication(
+                            0, a.getProvince(), a.getCanton(), a.getDistrict(), a.getAddress())
+            );
+            DAO_Ubication ubi = new DAO_Ubication();
+            if (ubi.create(emisor.getLocation())) {
+                DAO_User i_u = new DAO_User();
+                if (i_u.create(emisor.getUser())) {
+                    DAO_Emisor emi = new DAO_Emisor();
+                    if (emi.create(emisor)) {
+                        PrintWriter out = response.getWriter();
+                        response.setContentType("application/json; charset=UTF-8");
+                        out.write(gson.toJson(a));
+                        response.setStatus(200); // ok with content
+                        // response.sendRedirect("mensajes.jsp?msj=Registro completo");
+                    } else {
+                        i_u.delete(a.getUser());
+                        //response.sendRedirect("mensajes.jsp?msj=Error al registrar la info");
                     }
+                } else {
+                    // response.sendRedirect("mensajes.jsp?msj=Error al registrar el user");
                 }
             } else {
-                response.sendRedirect("mensajes.jsp?msj=No ha iniciado sesión");
+                // response.sendRedirect("mensajes.jsp?msj=Error al registrar el usuario");
             }
+
+        } catch (NumberFormatException ex) {
+            String msj = "Todos los campos deben ser rellenados";
+            response.sendRedirect(String.format("mensajes.jsp?msj=%s", msj));
+            System.err.println(Arrays.toString(ex.getStackTrace()));
+        } catch (IOException | SQLException ex) {
+            if (ex instanceof SQLIntegrityConstraintViolationException) {
+                // response.sendRedirect("mensajes.jsp?msj=El usuario ya existe&&link=index.jsp");
+            }
+            Logger.getLogger(ControlRegistrar.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+        }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

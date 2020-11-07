@@ -157,7 +157,7 @@ var cargarListaProductos = (function () {
 }());
 
 $("#Registrarse").click(
-        function verUsuarios() {
+        function verRegistrar() {
             t = $("#select_tipoId option:selected").val();
             nid = $("#input_dni").val();
             nfull = $("#input_nom").val();
@@ -193,6 +193,52 @@ $("#Registrarse").click(
                AuxiliarEmisor = JSON.parse(JSON.stringify(a));
                console.log(a);
                alert("Registro Exitoso de "+AuxiliarEmisor.name_full+". Gracias por preferirnos");
+               
+            }
+            );
+            
+        }
+);
+
+//Agregar
+
+$("#Agregar").click(
+        function AgregarCliente() {
+            t = $("#select_tipoId option:selected").val();
+            nid = $("#input_dni").val();
+            nfull = $("#input_nom").val();
+            ntel = $("#input_tel").val();
+            m = $("#input_email").val();
+            tname = $("#tradename").val();
+            u = $("#user").val();
+            ps = $("#password").val();
+            pnce = $("#input_province").val();
+            cntn = $("#input_canton").val();
+            dct = $("#input_dist").val();
+            ads = $("#input_dir").val();
+            AuxiliarEmisor = {
+                type_id: t,
+                num_id: nid,
+                name_full: nfull,
+                num_tel: ntel,
+                mail: m,
+                tradename: tname,
+                user: u,
+                pass: ps,
+                province: pnce,
+                canton: cntn,
+                district: dct,
+                address: ads
+            };
+             console.log(AuxiliarEmisor);
+            $.ajax({type: "POST", url: "Control_AddClient",
+                data: JSON.stringify(AuxiliarEmisor),
+                contentType: "application/json"}
+            ).then((a) =>
+            {
+               AuxiliarEmisor = JSON.parse(JSON.stringify(a));
+               console.log(a);
+               alert("Registro Exitoso de "+AuxiliarEmisor.name_full);
                
             }
             );
