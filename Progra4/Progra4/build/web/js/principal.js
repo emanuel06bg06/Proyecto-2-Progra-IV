@@ -35,7 +35,14 @@ $("#bnt_addProduct").click(
             {
                 Auxiliar = JSON.parse(JSON.stringify(p));
                 console.log(Auxiliar);
-                alert("Agregado el producto : " + Auxiliar.detail);
+                //alert("Agregado el producto : " + Auxiliar.detail);
+                Swal.fire({
+                   
+                    icon: 'success',
+                    title: '"Agregado el producto :  '+ Auxiliar.detail,
+                    
+                    timer: 2500
+                })
             },
                     (error) => {
                 alert(errorMessage(error.status));
@@ -58,7 +65,14 @@ function validacionesLogin(Emisor)
     //usuario inexistente
     if (Emisor.user === undefined)
     {
-        alert("El usuario solicitado no existe verifique su clave o contraseña");
+        //alert("El usuario solicitado no existe verifique su clave o contraseña");
+
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'El usuario solicitado no existe verifique su clave o contraseña',
+
+        })
     } else
     if (Emisor !== undefined)
     {
@@ -83,10 +97,23 @@ function validacionesLogin(Emisor)
         {//caso usuario normal sin habilitar
             if (s === 0)
             {
-                alert("El usuario solicitado debe ser habilitado");
+                // alert("El usuario solicitado debe ser habilitado");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'El usuario solicitado debe ser habilitado',
+
+                })
             } else
             {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Logueo',
+                    text: 'existo',
+                    timer: 1500
+                })
                 $(window).attr('location', 'view_principal.jsp');
+
             }
         }
     }
@@ -184,19 +211,19 @@ $("#Registrarse").click(
                 district: dct,
                 address: ads
             };
-             console.log(AuxiliarEmisor);
+            console.log(AuxiliarEmisor);
             $.ajax({type: "POST", url: "Control_Signin",
                 data: JSON.stringify(AuxiliarEmisor),
                 contentType: "application/json"}
             ).then((a) =>
             {
-               AuxiliarEmisor = JSON.parse(JSON.stringify(a));
-               console.log(a);
-               alert("Registro Exitoso de "+AuxiliarEmisor.name_full+". Gracias por preferirnos");
-               
+                AuxiliarEmisor = JSON.parse(JSON.stringify(a));
+                console.log(a);
+                alert("Registro Exitoso de " + AuxiliarEmisor.name_full + ". Gracias por preferirnos");
+
             }
             );
-            
+
         }
 );
 

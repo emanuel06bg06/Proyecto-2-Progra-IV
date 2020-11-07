@@ -36,7 +36,7 @@ input[type=text],input[type=email],input[type=tel]{
 
 a{
     font-size: 25px;
-    color: tomato;
+    color: #555;
     font-family: 'Audiowide';
     font-weight: bolder;
     margin-bottom: 20px;
