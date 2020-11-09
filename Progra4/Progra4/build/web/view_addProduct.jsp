@@ -6,12 +6,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/main.css" rel="stylesheet" type="text/css"/>
         <link href="css/view_addProduct.css" rel="stylesheet" type="text/css"/>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
          <script src="sweetalert2.min.js"></script>
         <link rel="stylesheet" href="sweetalert2.min.css">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+       
         <title>Sistema de Facturación</title>
     </head>
     <body>

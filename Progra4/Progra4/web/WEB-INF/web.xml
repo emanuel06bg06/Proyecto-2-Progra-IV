@@ -69,6 +69,10 @@
         <servlet-name>Control_Admin_Ver_Usuarios</servlet-name>
         <servlet-class>Controlador.Control_Admin_Ver_Usuarios</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Control_Logueado</servlet-name>
+        <servlet-class>Controlador.Control_Logueado</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Main_Control</servlet-name>
         <url-pattern>/Main_Control</url-pattern>
@@ -136,6 +140,10 @@
     <servlet-mapping>
         <servlet-name>Control_Admin_Ver_Usuarios</servlet-name>
         <url-pattern>/Control_Admin_Ver_Usuarios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Control_Logueado</servlet-name>
+        <url-pattern>/Control_Logueado</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -7,8 +7,8 @@
         <title>Sistema de Facturación</title>
         <link href="css/main.css" rel="stylesheet" type="text/css"/>
         <link href="css/view_add_client.css" rel="stylesheet" type="text/css"/>
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> 
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     </head>
     <body>
         <%@include file="encabezado.jsp" %>
@@ -21,8 +21,8 @@
                 <h1>Agregar Cliente</h1>
             </div>
             <div id="div_form_add_cliente">
-                <form action="Control_AddClient" method="POST">
-                    <div class="form-group">>
+                <form action="" method="POST">
+                    <div class="form-group">
                         <span>
                             
                             <label for="select_tipoId" Tipo de identificación</label>
@@ -59,7 +59,7 @@
                         <input id="input_dir" class="element_form"  type="text" name="address" placeholder="Direccion (Opcional)">  
                     </div>
                     <div>
-                        <input type="submit" value="Agregar">                    
+                        <input type="button" value="Agregar" id="btn-add-client">                    
                         <a href="view_principal.jsp">Volver a la página principal</a>
                     </div>
                     <% } else {
@@ -69,5 +69,11 @@
                 </form>
             </div>
         </div>
+     <script src="js/principal.js"></script>   
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+       
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> 
+   
     </body>
 </html>

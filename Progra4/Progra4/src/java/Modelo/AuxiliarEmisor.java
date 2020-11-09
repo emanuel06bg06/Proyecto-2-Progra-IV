@@ -5,6 +5,8 @@
  */
 package Modelo;
 
+import java.util.List;
+
 /**
  *
  * @author Emanuel Barrantes Guzmán
@@ -194,19 +196,38 @@ public class AuxiliarEmisor {
         this.address = address;
     }
 
+    public AuxiliarEmisor(int type_id, String num_id, String name_full, String num_tel, String mail, String tradename, String user, String pass, String province, String canton, String district, String address,
+            int id, String detail
+    ) {
+        this.type_id = type_id;
+        this.num_id = num_id;
+        this.name_full = name_full;
+        this.num_tel = num_tel;
+        this.mail = mail;
+        this.tradename = tradename;
+        this.user = user;
+        this.pass = pass;
+        this.province = province;
+        this.canton = canton;
+        this.district = district;
+        this.address = address;
+
+    }
+
     public AuxiliarEmisor() {
-          type_id = 0;
+        type_id = 0;
         num_id = "";
         name_full = "";
         num_tel = "";
         mail = "";
         tradename = "";
-       user = "";
+        user = "";
         pass = "";
         province = "";
         canton = "";
         district = "";
         address = "";
+
     }
 
     private int type_id;
@@ -215,8 +236,8 @@ public class AuxiliarEmisor {
     private String num_tel;
     private String mail;
     private String tradename;
-    private  String user ;
-    private String pass ;
+    private String user;
+    private String pass;
     private String province;
     private String canton;
     private String district;
