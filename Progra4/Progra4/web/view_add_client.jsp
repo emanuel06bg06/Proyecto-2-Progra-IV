@@ -26,40 +26,40 @@
                         <span>
                             
                             <label for="select_tipoId" Tipo de identificación</label>
-                            <select id="select_tipoId"  class="form-control" name="type_id" value="Tipo de identificación" class="element_form">
+                            <select id="select_tipoId"  class="form-control" name="type_id" value="Tipo de identificación" required>
                                 <option value="1">Física</option>
                                 <option value="2">Jurídica</option>
                             </select>
                         </span>
                         <span>
-                            <label for="input_dni" class="element_form">Número de cédula</label>
-                            <input id="input_dni" class="element_form" type="text" name="dni" placeholder="Ingrese el número de cédula">
+                            <label for="input_dni" >Número de cédula</label>
+                            <input id="input_dni" class="form-control" type="text" name="dni" placeholder="Ingrese el número de cédula" required>
                         </span>
                     </div>
                     <div>
-                        <label for="input_nom" class="element_form">Nombre completo</label>
-                        <input id="input_nom" class="element_form" type="text" name="name" placeholder="Ingrese el nombre completo">
-                        <label for="input_tel" class="element_form">Número de teléfono</label>
-                        <input id="input_tel" class="element_form" type="tel" name="num_tel" placeholder="Ingrese el número de teléfono">
+                        <label for="input_nom" >Nombre completo</label>
+                        <input id="input_nom" class="form-control" type="text" name="name" placeholder="Ingrese el nombre completo" required>
+                        <label for="input_tel">Número de teléfono</label>
+                        <input id="input_tel" class="form-control" type="tel" name="num_tel" placeholder="Ingrese el número de teléfono" required>
                     </div>
                     <div>
-                        <label for="input_email" class="element_form" >Correo electrónico</label>
-                        <input id="input_email" class="element_form"  type="email" name="mail" placeholder="Ingrese el correo electrónico">
-                        <label for="input_province" class="element_form" >Provincia</label>
-                        <input id="input_province" class="element_form" type="text" name="province" placeholder="Provincia">
+                        <label for="input_email" >Correo electrónico</label>
+                        <input id="input_email" class="form-control"  type="email" name="mail" placeholder="Ingrese el correo electrónico" required>
+                        <label for="input_province" >Provincia</label>
+                        <input id="input_province" class="form-control" type="text" name="province" placeholder="Provincia" required>
                     </div>
                     <div>
-                        <label for="input_canton" class="element_form" >Cantón</label>
-                        <input id="input_canton" class="element_form"  type="text" name="canton" placeholder="Cantón">
-                        <label for="input_dist" class="element_form" >Distrito</label>
-                        <input id="input_dist" class="element_form"  type="text" name="district" placeholder="Distrito">	
+                        <label for="input_canton"  >Cantón</label>
+                        <input id="input_canton"class="form-control"  type="text" name="canton" placeholder="Cantón" required>
+                        <label for="input_dist"  >Distrito</label>
+                        <input id="input_dist" class="form-control"  type="text" name="district" placeholder="Distrito" required>	
                     </div>
                     <div>
-                        <label for="input_dir" class="element_form" >Dirección</label>
-                        <input id="input_dir" class="element_form"  type="text" name="address" placeholder="Direccion (Opcional)">  
+                        <label for="input_dir"  >Dirección</label>
+                        <input id="input_dir" class="form-control"  type="text" name="address" placeholder="Direccion (Opcional)" required>  
                     </div>
                     <div>
-                        <input type="button" value="Agregar" id="btn-add-client">                    
+                        <input type="submit" class="btn btn-secondary" value="Agregar" id="btn-add-client" >                    
                         <a href="view_principal.jsp">Volver a la página principal</a>
                     </div>
                     <% } else {
