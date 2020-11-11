@@ -7,6 +7,9 @@ package Controlador;
 
 import DAO.DAO_User;
 import Model.List.List_Users;
+import Modelo.Category;
+import com.google.gson.Gson;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
