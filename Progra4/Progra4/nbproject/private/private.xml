@@ -3,20 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Escritorio/Proyecto%20Ema/Proyecto-2-Progra-IV/Progra4/Progra4/web/view_add_client.jsp</file>
-            <file>file:/D:/Escritorio/Proyecto%20Ema/Proyecto-2-Progra-IV/Progra4/Progra4/web/css/view_list_client.css</file>
-            <file>file:/D:/Escritorio/Proyecto%20Ema/Proyecto-2-Progra-IV/Progra4/Progra4/src/java/DataAccess/properties.properties</file>
-            <file>file:/D:/Escritorio/Proyecto%20Ema/Proyecto-2-Progra-IV/Progra4/Progra4/web/js/principal.js</file>
-            <file>file:/D:/Escritorio/Proyecto%20Ema/Proyecto-2-Progra-IV/Progra4/Progra4/web/view_perfil.jsp</file>
-            <file>file:/D:/Escritorio/Proyecto%20Ema/Proyecto-2-Progra-IV/Progra4/Progra4/web/view_list_facturas.jsp</file>
-            <file>file:/D:/Escritorio/Proyecto%20Ema/Proyecto-2-Progra-IV/Progra4/Progra4/web/encabezado.jsp</file>
-            <file>file:/D:/Escritorio/Proyecto%20Ema/Proyecto-2-Progra-IV/Progra4/Progra4/web/css/view_perfil.css</file>
-            <file>file:/D:/Escritorio/Proyecto%20Ema/Proyecto-2-Progra-IV/Progra4/Progra4/web/css/view_add_client.css</file>
-            <file>file:/D:/Escritorio/Proyecto%20Ema/Proyecto-2-Progra-IV/Progra4/Progra4/src/java/Controlador/Main_Control.java</file>
-            <file>file:/D:/Escritorio/Proyecto%20Ema/Proyecto-2-Progra-IV/Progra4/Progra4/web/css/main.css</file>
-            <file>file:/D:/Escritorio/Proyecto%20Ema/Proyecto-2-Progra-IV/Progra4/Progra4/web/index.jsp</file>
-            <file>file:/D:/Escritorio/Proyecto%20Ema/Proyecto-2-Progra-IV/Progra4/Progra4/web/view_principal.jsp</file>
-            <file>file:/D:/Escritorio/Proyecto%20Ema/Proyecto-2-Progra-IV/Progra4/Progra4/web/view_list_client.jsp</file>
+            <file>file:/C:/Users/Usuario/Desktop/PROYECTO/Proyecto-2-Progra-IV/Progra4/Progra4/src/java/DataAccess/properties.properties</file>
+            <file>file:/C:/Users/Usuario/Desktop/PROYECTO/Proyecto-2-Progra-IV/Progra4/Progra4/web/view_perfil.jsp</file>
+            <file>file:/C:/Users/Usuario/Desktop/PROYECTO/Proyecto-2-Progra-IV/Progra4/Progra4/web/js/principal.js</file>
+            <file>file:/C:/Users/Usuario/Desktop/PROYECTO/Proyecto-2-Progra-IV/Progra4/Progra4/src/java/Modelo/AuxiliarEmisor.java</file>
+            <file>file:/C:/Users/Usuario/Desktop/PROYECTO/Proyecto-2-Progra-IV/Progra4/Progra4/src/java/DAO/DAO_Emisor.java</file>
+            <file>file:/C:/Users/Usuario/Desktop/PROYECTO/Proyecto-2-Progra-IV/Progra4/Progra4/src/java/Controlador/ControlRegistrar.java</file>
+            <file>file:/C:/Users/Usuario/Desktop/PROYECTO/Proyecto-2-Progra-IV/Progra4/Progra4/src/java/DataAccess/DataBase.java</file>
+            <file>file:/C:/Users/Usuario/Desktop/PROYECTO/Proyecto-2-Progra-IV/Progra4/Progra4/src/java/Controlador/Control_Perfil.java</file>
         </group>
     </open-files>
 </project-private>
