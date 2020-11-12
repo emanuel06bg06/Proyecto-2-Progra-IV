@@ -6,6 +6,7 @@
 
 console.log("activo!!!!!");
 var Emisor = JSON.parse(localStorage.getItem('user'));
+var Clientes = JSON.parse(localStorage.getItem('clients'));
 //LOGIN
 
 $("#boton").click(
@@ -19,6 +20,7 @@ $("#boton").click(
             {
                 Emisor = JSON.parse(JSON.stringify(emisor));
                 localStorage.setItem('user', JSON.stringify(emisor));
+                cargarListaClientes();
 
                 validacionesLogin(Emisor);
             },
@@ -59,7 +61,7 @@ $("#bnt_editPerfil").click(
         function editarPerfil() {
             d = $("#selectProductos option:selected").text();
             x = $("#selectProductos option:selected").val();
-            console.log(Emisor);
+            //console.log(Emisor);
             dni = $('#Perfilinput_dni').val();
             name = $('#Perfilinput_nom').val();
             tel = $('#Perfilinput_tel').val();
@@ -84,23 +86,23 @@ $("#bnt_editPerfil").click(
                 dist: distrito,
                 ad: address
             };
-            console.log(AuxiliarEmisor);
+            //console.log(AuxiliarEmisor);
 
-              $.ajax({type: "POST", url: "Control_Perfil", data: JSON.stringify(AuxiliarEmisor),
-             contentType: "application/json"}).then((emisor) =>
-             {
-            AuxiliarEmisor = JSON.parse(JSON.stringify(emisor));
-            localStorage.setItem('user', JSON.stringify(emisor));
-            Emisor = JSON.parse(localStorage.getItem('user'));
-             console.log(emisor);
-             alert("Modificaciones guardadas con exito");
-            
-             
-             },
-             (error) => {
-             alert(errorMessage(error.status));
-             });
-             
+            $.ajax({type: "POST", url: "Control_Perfil", data: JSON.stringify(AuxiliarEmisor),
+                contentType: "application/json"}).then((emisor) =>
+            {
+                AuxiliarEmisor = JSON.parse(JSON.stringify(emisor));
+                localStorage.setItem('user', JSON.stringify(emisor));
+                Emisor = JSON.parse(localStorage.getItem('user'));
+                //console.log(emisor);
+                alert("Modificaciones guardadas con exito");
+
+
+            },
+                    (error) => {
+                alert(errorMessage(error.status));
+            });
+
         }
 );
 function validacionesLogin(Emisor)
@@ -164,11 +166,11 @@ function validacionesLogin(Emisor)
                     title: 'Logueo',
                     text: 'existo',
                     timer: 1500
-                })
+                });
 
 
                 $(window).attr('location', 'view_principal.jsp');
-                $
+
 
             }
         }
@@ -325,30 +327,11 @@ $("#btn-add-client").click(
 
             }
             );
-            ;
+
 
         }
 );
-/*
- var logueado = (function () {
- 
- var AuxiliarEmisor = {type_id: 1, num_id: "", name_full: "", num_tel: "", mail: "", tradename: "", user: $("#input_idUser").val(), pass: "", province: "", canton: "", district: "", address: ""
- };
- Ubication = {idUbication: 0, province: "", canton: "", distrito: "", address: ""};
- User = {user: $("#input_idUser").val(), pass: $("#input_password").val(), status: 1, rol: 1};
- Emisor = {tradename: "", User, products: "", dni: "", name: "", telephone: ""
- , e_mail: "", id_type: "", Ubication};
- $.ajax({type: "POST", url: "Control_Logueado",
- data: JSON.stringify(AuxiliarEmisor),
- contentType: "application/json"}
- ).then((emisor) =>
- {
- 
- }
- 
- );
- }());
- */
+
 var cargarPerfilUsuario = (function () {
     if (Emisor) {
         $('#Bienvenido').append($('<H1>').val(Emisor.name).text(Emisor.name));
@@ -369,17 +352,98 @@ var cargarPerfilUsuario = (function () {
 
 }());
 
-/*
- * 
- * localStorage stores key-value pairs. So to store a entire javascript object we need to serialize it first (with JSON.stringify, for example):
- 
- localStorage.setItem('user', JSON.stringify(user));
- 
- Then to retrieve it from the store and convert to an object again:
- 
- var user = JSON.parse(localStorage.getItem('user'));
- 
- If we need to delete all entries of the store we can simply do:
- 
- localStorage.clear();
- */
+
+var mostrarListaClientes = (function () {
+
+
+    //
+    for (var i = 0; i < Clientes.clientes.length; i++) {
+
+        type = Clientes.clientes[i].id_type;
+        if (type === 1) {
+            type = "Físico";
+        } else if (type === 2) {
+            type = "Jurídico";
+        }
+        dni = Clientes.clientes[i].dni;
+        name = Clientes.clientes[i].name;
+        telephone = Clientes.clientes[i].telephone;
+        e_mail = Clientes.clientes[i].e_mail;
+        province = Clientes.clientes[i].location.province;
+        canton = Clientes.clientes[i].location.canton;
+        distrito = Clientes.clientes[i].location.distrito;
+        direccion = Clientes.clientes[i].location.address;
+
+        var newElement = '<input type="submit" value="Agregar Cliente" name=btnAddC_' + i + '>';
+        $('#tableMain').append("<tr><td>" + type + "</td><td>" + dni + "</td><td>" +
+                name + "</td><td>" + telephone + "</td><td>" + e_mail + "</td><td>" + province +
+                "</td><td>" + canton + "</td><td>" + distrito + "</td> <td>"
+                + Clientes.clientes[i].location.address + "</td>" + " <td>" + newElement + "</td></tr>"
+                );
+
+        // $( "#tableMain" ).append( $(newElement) );
+        //  <td><input type="submit" 
+        //  name="btnAddC_<%= i%>" 
+        //  value="Agregar Cliente"></td>
+    }
+
+}());
+
+function cargarListaClientes() {
+    //$('#div_principal').append($('<H2>').val(Emisor.name).text(Emisor.name));
+    console.log(Emisor);
+    $.ajax({type: "POST", url: "ControlB_Facturar",
+        data: JSON.stringify(Emisor),
+        contentType: "application/json"}
+    ).then((clientes) =>
+    {
+        localStorage.setItem('clients', JSON.stringify(clientes));
+    }
+    );
+}
+
+var cargarPerfilUsuario = (function () {
+    if (!Clientes)
+    {
+        console.log("Lista clientes nula");
+    } else
+    {
+        //console.log(Clientes);
+    }
+
+
+}());
+
+
+
+
+$(document).ready(function () {
+    //=================================================================
+    //click on table body
+    //$("#tableMain tbody tr").click(function () {
+    $('#tableMain tbody').on('click', 'tr', function () {
+        //get row contents into an array
+        var tableData = $(this).children("td").map(function () {
+            return $(this).text();
+        }).get();
+        var td = tableData[0] + tableData[1]
+                + tableData[2]
+                + tableData[3] + tableData[4]
+                + tableData[5] + tableData[6]
+                + tableData[7] + tableData[8]
+                + tableData[9];
+
+        Emisor.dni = tableData[1];
+        Emisor.name = tableData[2];
+        Emisor.telephone = tableData[3];
+        Emisor.e_mail = tableData[4];
+        Emisor.tradename = tableData[5];
+        Emisor.location.province = tableData[6];
+        Emisor.location.canton = tableData[7];
+        Emisor.location.distrito = tableData[8];
+        Emisor.location.address = tableData[9];
+      
+    });
+
+});
+

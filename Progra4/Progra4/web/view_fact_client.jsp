@@ -5,6 +5,7 @@
     <head>
         <link href="css/stylesheet.css" rel="stylesheet" type="text/css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <title>Sistema de Facturación</title>
 
     </head>
@@ -28,6 +29,6 @@
             </form>
             <a href="view_principal.jsp">Volver al inicio</a>
         </div>
-
+ <script src= "js/principal.js"></script>
     </body>
 </html>
