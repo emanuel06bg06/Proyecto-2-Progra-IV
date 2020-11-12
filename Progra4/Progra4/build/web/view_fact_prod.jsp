@@ -7,7 +7,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/main.css" rel="stylesheet" type="text/css"/>
         <link href="css/view_fact_prod.css" rel="stylesheet" type="text/css"/>
-       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <title>Sistema de Facturación</title>
 
     </head>
@@ -18,31 +18,20 @@
             <div id="div_principal">
                 <div id=div_table">
                     <form action="Control_Fac_P" method="POST">
-                        <jsp:useBean class="Modelo.ListProduct" id="productos" scope="session"></jsp:useBean>                
-                            <table border="1">
-                                <thead>
-                                    <tr>
-                                        <th>Categoria</th>
-                                        <th>Descripción</th>
-                                        <th>Precio</th>
-                                        <th>I.V.A.</th>
-                                        <th>Cantidad(unidades)</th>
-                                        <th></th>									
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <%
-                                    for (int i = 0; i < productos.size(); i++) {
-                                %>
+                      <%--  jsp:useBean class="Modelo.ListProduct" id="productos" scope="session"></jsp:useBean>          --%>        
+                        <table border="1" id="tablaProductos">
+                            <thead>
                                 <tr>
-                                    <td><%= productos.get(i).getCategory().getDescripcion()%></td>
-                                    <td><%= productos.get(i).getDetail()%></td>
-                                    <td><%= productos.get(i).getPrice()%></td>									
-                                    <td><%= productos.get(i).getCategory().getIva() * 100%>%</td>
-                                    <td><input name="cantidad_<%= i%>" type="number" min="0" step="1"></td>
-                                    <td><input name="btnAdd_<%= i%>" type="submit" value="Agregar"></td>
+                                    <th>Categoria</th>
+                                    <th>Descripción</th>
+                                    <th>Precio</th>
+                                    <th>I.V.A.</th>
+                                    <th>Cantidad(unidades)</th>
+                                    <th></th>									
                                 </tr>
-                                <% }%>							 
+                            </thead>
+                            <tbody>
+
                             </tbody>
                         </table>
                     </form>
@@ -53,5 +42,6 @@
                 <a href="view_principal.jsp">Volver al inicio</a>
             </div>
         </div>
+        <script src="js/principal.js"></script>
     </body>
 </html>

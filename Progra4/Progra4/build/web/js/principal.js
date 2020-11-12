@@ -7,6 +7,9 @@
 console.log("activo!!!!!");
 var Emisor = JSON.parse(localStorage.getItem('user'));
 var Clientes = JSON.parse(localStorage.getItem('clients'));
+var listaProductos = JSON.parse(localStorage.getItem('listaProductos'));
+var x = JSON.parse(localStorage.getItem('x'));
+//listaProductos
 //LOGIN
 
 $("#boton").click(
@@ -21,6 +24,8 @@ $("#boton").click(
                 Emisor = JSON.parse(JSON.stringify(emisor));
                 localStorage.setItem('user', JSON.stringify(emisor));
                 cargarListaClientes();
+                cargarListaP();
+
 
                 validacionesLogin(Emisor);
             },
@@ -334,6 +339,7 @@ $("#btn-add-client").click(
 
 var cargarPerfilUsuario = (function () {
     if (Emisor) {
+
         $('#Bienvenido').append($('<H1>').val(Emisor.name).text(Emisor.name));
         $('#Perfilinput_dni').val(Emisor.dni);
         $('#Perfilinput_nom').val(Emisor.name);
@@ -346,6 +352,7 @@ var cargarPerfilUsuario = (function () {
         $('#Perfilinput_dir').val(Emisor.location.address);
         (error) => {
             alert(errorMessage(error.status));
+
         };
     } else
         console.log("Sin iniciar sesion");
@@ -380,14 +387,46 @@ var mostrarListaClientes = (function () {
                 "</td><td>" + canton + "</td><td>" + distrito + "</td> <td>"
                 + Clientes.clientes[i].location.address + "</td>" + " <td>" + newElement + "</td></tr>"
                 );
-
-        // $( "#tableMain" ).append( $(newElement) );
-        //  <td><input type="submit" 
-        //  name="btnAddC_<%= i%>" 
-        //  value="Agregar Cliente"></td>
     }
 
 }());
+function cargarListaP() {
+
+    console.log(Emisor);
+    $.ajax({type: "POST", url: "Control_ListaProductos",
+        data: JSON.stringify(Emisor),
+        contentType: "application/json"}
+    ).then((listaProductos) =>
+    {
+        localStorage.setItem('listaProductos', JSON.stringify(listaProductos));
+
+    }
+    );
+
+}
+
+var mostrarListaP = (function () {
+
+    for (var i = 0; i < listaProductos.length; i++) {
+
+        id = listaProductos[i].id;
+        detail = listaProductos[i].detail;
+        price = listaProductos[i].price;
+        descripcion = listaProductos[i].category.descripcion;
+        iva = (listaProductos[i].category.iva) * 100;
+        cantidad = listaProductos[i].cantidad;
+        var step = '<input name=cantidad_' + i + ' type="number" min="0" step="1">';
+        var c = '<input name=btnAdd_' + i + ' type="submit" value="Agregar">';
+        $('#tablaProductos').append("<tr><td>" + descripcion + "</td><td>" + detail + "</td><td>" +
+                price + "</td><td>" + iva + "</td><td>" + step + "</td><td>" + c + "</td></tr>"
+                );
+    }
+
+}());
+
+
+
+
 
 function cargarListaClientes() {
     //$('#div_principal').append($('<H2>').val(Emisor.name).text(Emisor.name));
@@ -442,7 +481,7 @@ $(document).ready(function () {
         Emisor.location.canton = tableData[7];
         Emisor.location.distrito = tableData[8];
         Emisor.location.address = tableData[9];
-      
+
     });
 
 });
