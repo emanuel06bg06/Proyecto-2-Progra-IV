@@ -7,7 +7,9 @@
         <title>Sistema de Facturación</title>
         <link href="css/main.css" rel="stylesheet" type="text/css"/>
         <link href="css/view_add_client.css" rel="stylesheet" type="text/css"/>
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="sweetalert2.min.js"></script>
+        <link rel="stylesheet" href="sweetalert2.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     </head>
     <body>
@@ -24,7 +26,7 @@
                 <form action="" method="POST">
                     <div class="form-group">
                         <span>
-                            
+
                             <label for="select_tipoId" Tipo de identificación</label>
                             <select id="select_tipoId"  class="form-control" name="type_id" value="Tipo de identificación" required>
                                 <option value="1">Física</option>
@@ -69,11 +71,11 @@
                 </form>
             </div>
         </div>
-     <script src="js/principal.js"></script>   
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-       
+        <script src="js/principal.js"></script>   
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> 
-   
+
     </body>
 </html>

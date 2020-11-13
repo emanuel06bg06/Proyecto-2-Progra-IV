@@ -326,11 +326,17 @@ $("#btn-add-client").click(
                 contentType: "application/json"}
             ).then((a) =>
             {
-                // AuxiliarEmisor = JSON.parse(JSON.stringify(a));
+               
 
-                alert("Registro Exitoso de " + AuxiliarEmisor.name_full + ". Gracias por preferirnos");
+   Swal.fire({
 
+                    icon: 'success',
+                    title: 'Registro Exitoso de ' + AuxiliarEmisor.name_full + '. Gracias por preferirnos',
+
+                    timer: 2500
+                })
             }
+                  
             );
 
 
@@ -381,7 +387,7 @@ var mostrarListaClientes = (function () {
         distrito = Clientes.clientes[i].location.distrito;
         direccion = Clientes.clientes[i].location.address;
 
-        var newElement = '<input type="submit" value="Agregar Cliente" name=btnAddC_' + i + '>';
+        var newElement = '<input type="submit"  class="btn btn secondary" value="Agregar Cliente" name=btnAddC_' + i + '>';
         $('#tableMain').append("<tr><td>" + type + "</td><td>" + dni + "</td><td>" +
                 name + "</td><td>" + telephone + "</td><td>" + e_mail + "</td><td>" + province +
                 "</td><td>" + canton + "</td><td>" + distrito + "</td> <td>"
@@ -416,7 +422,7 @@ var mostrarListaP = (function () {
         iva = (listaProductos[i].category.iva) * 100;
         cantidad = listaProductos[i].cantidad;
         var step = '<input name=cantidad_' + i + ' type="number" min="0" step="1">';
-        var c = '<input name=btnAdd_' + i + ' type="submit" value="Agregar">';
+        var c = '<input name=btnAdd_' + i + ' type="submit" class="btn btn secondary"  value="Agregar">';
         $('#tablaProductos').append("<tr><td>" + descripcion + "</td><td>" + detail + "</td><td>" +
                 price + "</td><td>" + iva + "</td><td>" + step + "</td><td>" + c + "</td></tr>"
                 );

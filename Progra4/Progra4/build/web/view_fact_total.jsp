@@ -24,18 +24,18 @@
             <jsp:useBean class="Modelo.Factura" id="factura" scope="session" ></jsp:useBean>
                 <div id="div_facT">
                     <form action="Control_Fac_T" method="POST">                    
-                        <table border="1">
-                            <thead>
+                        <table class="table">
+                            <thead class="thead-dark">
                                 <tr>
-                                    <th>Tipo de identificación</th> &nbsp
-                                    <th>Número de cédula</th> &nbsp
-                                    <th>Nombre completo</th> &nbsp
-                                    <th>Número de teléfono</th> &nbsp
-                                    <th>E-Mail</th> &nbsp
-                                    <th>Provincia</th> &nbsp
-                                    <th>Cantón</th> &nbsp
-                                    <th>Distrito</th> &nbsp
-                                    <th>Dirección</th> &nbsp									
+                                    <th scope="col">Tipo de identificación</th> &nbsp
+                                    <th scope="col">Número de cédula</th> &nbsp
+                                    <th scope="col">Nombre completo</th> &nbsp
+                                    <th scope="col">Número de teléfono</th> &nbsp
+                                    <th scope="col">E-Mail</th> &nbsp
+                                    <th scope="col">Provincia</th> &nbsp
+                                    <th scope="col">Cantón</th> &nbsp
+                                    <th scope="col">Distrito</th> &nbsp
+                                    <th scope="col">Dirección</th> &nbsp									
                                 </tr>
                             </thead>
                             <tbody>						
