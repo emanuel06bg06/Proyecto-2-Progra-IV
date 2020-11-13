@@ -18,7 +18,7 @@
             <div id="div_principal">
                 <div id=div_table">
                     <form action="Control_Fac_P" method="POST">
-                      <%--  jsp:useBean class="Modelo.ListProduct" id="productos" scope="session"></jsp:useBean>          --%>        
+                      <jsp:useBean class="Modelo.ListProduct" id="productos" scope="session"></jsp:useBean>              
                         <table border="1" id="tablaProductos">
                             <thead>
                                 <tr>

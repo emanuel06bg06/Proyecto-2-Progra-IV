@@ -8,7 +8,7 @@ console.log("activo!!!!!");
 var Emisor = JSON.parse(localStorage.getItem('user'));
 var Clientes = JSON.parse(localStorage.getItem('clients'));
 var listaProductos = JSON.parse(localStorage.getItem('listaProductos'));
-var x = JSON.parse(localStorage.getItem('x'));
+var facturas = JSON.parse(localStorage.getItem('facturas'));
 //listaProductos
 //LOGIN
 
@@ -25,7 +25,7 @@ $("#boton").click(
                 localStorage.setItem('user', JSON.stringify(emisor));
                 cargarListaClientes();
                 cargarListaP();
-
+                cargarListaFacturas();
 
                 validacionesLogin(Emisor);
             },
@@ -440,6 +440,40 @@ function cargarListaClientes() {
     }
     );
 }
+
+function cargarListaFacturas() {
+    //$('#div_principal').append($('<H2>').val(Emisor.name).text(Emisor.name));
+    console.log(Emisor);
+    $.ajax({type: "POST", url: "Control_ListaFacturas",
+        data: JSON.stringify(Emisor),
+        contentType: "application/json"}
+    ).then((facturas) =>
+    {
+        localStorage.setItem('facturas', JSON.stringify(facturas));
+    }
+    );
+}
+var mostrarListaF = (function () {
+    
+  
+    for (var i = 0; i < facturas.facturas.length; i++) {
+        var botones='<form action="Control_Fac_List" method="POST"><input type="submit" name=verPdf_'
+                + i+' value="Ver PDF"></form></td><td><form action="Control_XML" method="POST"><input type="submit" name=verXML_'+ 
+                i+' value="Ver XML"></form></td> ';
+        id = facturas.facturas[i].id;
+        dni = facturas.facturas[i].cliente.dni;
+        name = facturas.facturas[i].cliente.name;
+        c = facturas.facturas[0].productos[0].cantidad;
+        total = 0;
+       
+ $("#tabla_list_facturas").append('<tr><td>'+id+'</td><td>'
+        +dni+'</td><td>'+name+
+        '</td><td>'+botones+'</td></tr>');
+
+
+    }
+
+}());
 
 var cargarPerfilUsuario = (function () {
     if (!Clientes)
