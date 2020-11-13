@@ -281,8 +281,13 @@ $("#Registrarse").click(
                 AuxiliarEmisor = JSON.parse(JSON.stringify(a));
 
 
-                alert("Registro Exitoso de " + AuxiliarEmisor.name_full + ". Gracias por preferirnos");
-
+                
+  Swal.fire({
+                    icon: 'success',
+                    title: 'Registro Exitoso de ' + AuxiliarEmisor.name_full + ' Gracias por preferirnos',
+                    
+                    timer: 1500
+                });
             }
             );
 
