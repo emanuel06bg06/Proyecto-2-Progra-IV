@@ -23,7 +23,7 @@
             <div id="div_form">
                 <jsp:useBean class="Model.List.ListFacturas" id="facturas" scope="session"></jsp:useBean>
                 <div id="div_tabla">
-                    <table border="1" >
+                    <table border="1"  >
                         <thead>
                             <tr>
                                 <th>Numero de factura</th>
@@ -31,12 +31,11 @@
                                 <th>Nombre del cliente</th>
                                 <th>PDF</th>
                                 <th>XML</th>
-                                <th></th>
-                                <th></th>
+                                
 
                             </tr>
                         </thead>
-                        <tbody id="tabla_list_facturas">
+                        <tbody id="tabla_list_facturas" >
                             
 
                         </tbody>

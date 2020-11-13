@@ -13,8 +13,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <title>Sistema de Facturación</title>
         <style>
-       
-            tr:hover {background-color: #6c757d; color:black;font-weight: bold }
+            tr {background:hsla(358, 12%, 48%, 0.7);font-weight: bold;  }
+            tr:hover {background-color: darkred;font-weight: bold; color:white; }
 
         </style>
     </head>
@@ -28,7 +28,7 @@
         %>
         <div class="container" id="container">
             <form action="Control_Fac_C" method="GET">
-                <table class="table" id="tableMain"  >
+                <table  class="table" id="tableMain" >
                     <thead  class="thead-dark" >
                         <tr >
                             <th scope="col">Tipo de identificación</th>

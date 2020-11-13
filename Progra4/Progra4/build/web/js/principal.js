@@ -47,13 +47,8 @@ $("#bnt_addProduct").click(
                 //Auxiliar = JSON.parse(JSON.stringify(p));
                 listaProductos = JSON.parse(localStorage.getItem('listaProductos', Auxiliar));
                 cargarListaP(); //alert("Agregado el producto : " + Auxiliar.detail);
-                Swal.fire({
-
-                    icon: 'success',
-                    title: '"Agregado el producto :  ' + Auxiliar.detail,
-
-                    timer: 2500
-                });
+                validacionesAddProd();
+                
             },
                     (error) => {
                 alert(errorMessage(error.status));
@@ -223,6 +218,8 @@ function errorMessage(status) {
             return "Usuario no autorizado";
         case 406:
             return "Registro duplicado";
+            case 500:
+            return "Error";
         default:
             return "Error: " + status;
     }
@@ -332,16 +329,12 @@ $("#btn-add-client").click(
                 cargarListaP();
                 cargarListaFacturas();
 
-                Swal.fire({
 
-                    icon: 'success',
-                    title: 'Registro Exitoso de ' + AuxiliarEmisor.name_full + '. Gracias por preferirnos',
-
-                    timer: 2500
-                });
             }
 
             );
+            validacionesAddClient()
+
 
 
         }
@@ -371,9 +364,9 @@ var cargarPerfilUsuario = (function () {
 
 
 var mostrarListaClientes = (function () {
-    
+
     cargarListaClientes();
-    
+
     if (Clientes) {
         //
         for (var i = 0; i < Clientes.clientes.length; i++) {
@@ -421,9 +414,9 @@ function cargarListaP() {
 }
 
 var mostrarListaP = (function () {
-    ;
-                cargarListaP();
-            
+   
+    cargarListaP();
+
     if (listaProductos) {
         for (var i = 0; i < listaProductos.length; i++) {
 
@@ -475,8 +468,8 @@ function cargarListaFacturas() {
     );
 }
 var mostrarListaF = (function () {
-    
-                cargarListaFacturas();
+
+    cargarListaFacturas();
     if (facturas) {
 
         for (var i = 0; i < facturas.facturas.length; i++) {
@@ -546,3 +539,64 @@ $(document).ready(function () {
 
 });
 
+function validacionesAddClient()
+{
+    if ($("#input_dni").val() === "" ||
+            $("#input_nom").val() === "" ||
+            $("#input_tel").val() === "" ||
+            $("#input_email").val() === "" ||
+            $("#tradename").val() === "" ||
+            $("#user").val() === "" ||
+            $("#password").val() === "" ||
+            $("#input_province").val() === "" ||
+            $("#input_canton").val() === "" ||
+            $("#input_dist").val() === "" ||
+            $("#input_dir").val() === "")
+    {
+        Swal.fire({
+            icon: 'error',
+            title: 'Campos invalidos...',
+
+        });
+    } else
+    {
+        Swal.fire({
+
+            icon: 'success',
+            title: 'Registro Exitoso de ' + AuxiliarEmisor.name_full + '. Gracias por preferirnos',
+
+            timer: 5000
+        });
+    }
+}
+
+function validacionesAddProd()
+{
+
+    /*
+     * d = $("#selectProductos option:selected").text();
+     x = $("#selectProductos option:selected").val();
+     Auxiliar = {id: 0, detail: $("#txt_detail").val(), price: $("#txt_price").val(), iva: x, descripcion: d};
+     
+     */
+    if ($("#txt_detail").val() === "" ||
+            $("#txt_price").val() === "" || $("#txt_price").val() === 0||
+            $("#selectProductos").val ===""||
+            $("#selectProductos").val === 0)
+    {
+        Swal.fire({
+            icon: 'error',
+            title: 'Campos invalidos...',
+
+        });
+    } else
+    {
+        Swal.fire({
+
+                    icon: 'success',
+                    title: 'Producto agregado' ,
+
+                    timer: 2500
+                });
+    }
+}

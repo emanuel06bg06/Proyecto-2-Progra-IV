@@ -66,8 +66,8 @@ public class Pdf {
             table.addHeaderCell(factura.getEmisor().getE_mail());
             table.addHeaderCell(factura.getEmisor().getLocation().getProvince());
             table.addHeaderCell(factura.getEmisor().getLocation().getCanton());
-            table.addHeaderCell(factura.getCliente().getLocation().getDistrito());
-            table.addHeaderCell(factura.getCliente().getLocation().getAddress());
+            table.addHeaderCell(factura.getEmisor().getLocation().getDistrito());
+            table.addHeaderCell(factura.getEmisor().getLocation().getAddress());
 
 //			c = new Cell(1, 4);
 //
