@@ -49,7 +49,7 @@ public class Control_ListaProductos extends HttpServlet {
         if (a != null) {
             DAO_Product daoP = new DAO_Product();
             ListProduct listaProductos = daoP.read(a.getDni());
-            session.setAttribute("list_clients", listaProductos);
+            session.setAttribute("productos", listaProductos);
             PrintWriter out = response.getWriter();
             response.setContentType("application/json; charset=UTF-8");
             out.write(gson.toJson(listaProductos));

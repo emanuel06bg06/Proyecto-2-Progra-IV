@@ -48,7 +48,7 @@ public class Control_ListaFacturas extends HttpServlet {
         if (a != null) {
             DAO_Factura daoF = new DAO_Factura();
             ListFacturas facturas = daoF.findByOwner(a);
-            session.setAttribute("list_clients", facturas);
+            session.setAttribute("facturas", facturas);
             PrintWriter out = response.getWriter();
             response.setContentType("application/json; charset=UTF-8");
             out.write(gson.toJson(facturas));

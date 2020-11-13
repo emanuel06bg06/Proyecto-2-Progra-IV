@@ -58,7 +58,7 @@ public class DataBase {
         Connection c = bd.getConnection();
         try {
             Statement st = c.createStatement();
-            st.execute("insert into identification values(6,'pablo')");
+            st.execute("insert into identification values(1,'pablo')");
         } catch (SQLException ex) {
             Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
         }

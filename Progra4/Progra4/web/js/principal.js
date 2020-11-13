@@ -44,16 +44,16 @@ $("#bnt_addProduct").click(
             $.ajax({type: "POST", url: "Control_AddProduct", data: JSON.stringify(Auxiliar),
                 contentType: "application/json"}).then((p) =>
             {
-                Auxiliar = JSON.parse(JSON.stringify(p));
-
-                //alert("Agregado el producto : " + Auxiliar.detail);
+                //Auxiliar = JSON.parse(JSON.stringify(p));
+                listaProductos = JSON.parse(localStorage.getItem('listaProductos', Auxiliar));
+                cargarListaP(); //alert("Agregado el producto : " + Auxiliar.detail);
                 Swal.fire({
 
                     icon: 'success',
                     title: '"Agregado el producto :  ' + Auxiliar.detail,
 
                     timer: 2500
-                })
+                });
             },
                     (error) => {
                 alert(errorMessage(error.status));
@@ -132,7 +132,7 @@ function validacionesLogin(Emisor)
             title: 'Oops...',
             text: 'El usuario solicitado no existe verifique su clave o contraseña',
 
-        })
+        });
     } else
     if (Emisor !== undefined)
     {
@@ -163,7 +163,7 @@ function validacionesLogin(Emisor)
                     title: 'Oops...',
                     text: 'El usuario solicitado debe ser habilitado',
 
-                })
+                });
             } else
             {
                 Swal.fire({
@@ -283,6 +283,7 @@ $("#Registrarse").click(
             {
                 AuxiliarEmisor = JSON.parse(JSON.stringify(a));
 
+
                 alert("Registro Exitoso de " + AuxiliarEmisor.name_full + ". Gracias por preferirnos");
 
             }
@@ -326,17 +327,20 @@ $("#btn-add-client").click(
                 contentType: "application/json"}
             ).then((a) =>
             {
-               
 
-   Swal.fire({
+                cargarListaClientes();
+                cargarListaP();
+                cargarListaFacturas();
+
+                Swal.fire({
 
                     icon: 'success',
                     title: 'Registro Exitoso de ' + AuxiliarEmisor.name_full + '. Gracias por preferirnos',
 
                     timer: 2500
-                })
+                });
             }
-                  
+
             );
 
 
@@ -367,34 +371,39 @@ var cargarPerfilUsuario = (function () {
 
 
 var mostrarListaClientes = (function () {
+    
+    cargarListaClientes();
+    
+    if (Clientes) {
+        //
+        for (var i = 0; i < Clientes.clientes.length; i++) {
 
+            type = Clientes.clientes[i].id_type;
+            if (type === 1) {
+                type = "Físico";
+            } else if (type === 2) {
+                type = "Jurídico";
+            }
+            dni = Clientes.clientes[i].dni;
+            name = Clientes.clientes[i].name;
+            telephone = Clientes.clientes[i].telephone;
+            e_mail = Clientes.clientes[i].e_mail;
+            province = Clientes.clientes[i].location.province;
+            canton = Clientes.clientes[i].location.canton;
+            distrito = Clientes.clientes[i].location.distrito;
+            direccion = Clientes.clientes[i].location.address;
 
-    //
-    for (var i = 0; i < Clientes.clientes.length; i++) {
-
-        type = Clientes.clientes[i].id_type;
-        if (type === 1) {
-            type = "Físico";
-        } else if (type === 2) {
-            type = "Jurídico";
+            var newElement = '<input type="submit"  class="btn btn secondary" value="Agregar Cliente" name=btnAddC_' + i + '>';
+            $('#tableMain').append("<tr><td>" + type + "</td><td>" + dni + "</td><td>" +
+                    name + "</td><td>" + telephone + "</td><td>" + e_mail + "</td><td>" + province +
+                    "</td><td>" + canton + "</td><td>" + distrito + "</td> <td>"
+                    + Clientes.clientes[i].location.address + "</td>" + " <td>" + newElement + "</td></tr>"
+                    );
         }
-        dni = Clientes.clientes[i].dni;
-        name = Clientes.clientes[i].name;
-        telephone = Clientes.clientes[i].telephone;
-        e_mail = Clientes.clientes[i].e_mail;
-        province = Clientes.clientes[i].location.province;
-        canton = Clientes.clientes[i].location.canton;
-        distrito = Clientes.clientes[i].location.distrito;
-        direccion = Clientes.clientes[i].location.address;
-
-        var newElement = '<input type="submit"  class="btn btn secondary" value="Agregar Cliente" name=btnAddC_' + i + '>';
-        $('#tableMain').append("<tr><td>" + type + "</td><td>" + dni + "</td><td>" +
-                name + "</td><td>" + telephone + "</td><td>" + e_mail + "</td><td>" + province +
-                "</td><td>" + canton + "</td><td>" + distrito + "</td> <td>"
-                + Clientes.clientes[i].location.address + "</td>" + " <td>" + newElement + "</td></tr>"
-                );
+    } else
+    {
+        console.log("Lista de clientes vacia");
     }
-
 }());
 function cargarListaP() {
 
@@ -412,22 +421,28 @@ function cargarListaP() {
 }
 
 var mostrarListaP = (function () {
+    ;
+                cargarListaP();
+            
+    if (listaProductos) {
+        for (var i = 0; i < listaProductos.length; i++) {
 
-    for (var i = 0; i < listaProductos.length; i++) {
-
-        id = listaProductos[i].id;
-        detail = listaProductos[i].detail;
-        price = listaProductos[i].price;
-        descripcion = listaProductos[i].category.descripcion;
-        iva = (listaProductos[i].category.iva) * 100;
-        cantidad = listaProductos[i].cantidad;
-        var step = '<input name=cantidad_' + i + ' type="number" min="0" step="1">';
-        var c = '<input name=btnAdd_' + i + ' type="submit" class="btn btn secondary"  value="Agregar">';
-        $('#tablaProductos').append("<tr><td>" + descripcion + "</td><td>" + detail + "</td><td>" +
-                price + "</td><td>" + iva + "</td><td>" + step + "</td><td>" + c + "</td></tr>"
-                );
+            id = listaProductos[i].id;
+            detail = listaProductos[i].detail;
+            price = listaProductos[i].price;
+            descripcion = listaProductos[i].category.descripcion;
+            iva = (listaProductos[i].category.iva) * 100;
+            cantidad = listaProductos[i].cantidad;
+            var step = '<input name=cantidad_' + i + ' type="number" min="0" step="1">';
+            var c = '<input name=btnAdd_' + i + ' type="submit" class="btn btn secondary"  value="Agregar">';
+            $('#tablaProductos').append("<tr><td>" + descripcion + "</td><td>" + detail + "</td><td>" +
+                    price + "</td><td>" + iva + "</td><td>" + step + "</td><td>" + c + "</td></tr>"
+                    );
+        }
+    } else
+    {
+        console.log("lista de productos vacia");
     }
-
 }());
 
 
@@ -461,24 +476,29 @@ function cargarListaFacturas() {
 }
 var mostrarListaF = (function () {
     
-  
-    for (var i = 0; i < facturas.facturas.length; i++) {
-        var botones='<form action="Control_Fac_List" method="POST"><input type="submit" name=verPdf_'
-                + i+' value="Ver PDF"></form></td><td><form action="Control_XML" method="POST"><input type="submit" name=verXML_'+ 
-                i+' value="Ver XML"></form></td> ';
-        id = facturas.facturas[i].id;
-        dni = facturas.facturas[i].cliente.dni;
-        name = facturas.facturas[i].cliente.name;
-        c = facturas.facturas[0].productos[0].cantidad;
-        total = 0;
-       
- $("#tabla_list_facturas").append('<tr><td>'+id+'</td><td>'
-        +dni+'</td><td>'+name+
-        '</td><td>'+botones+'</td></tr>');
+                cargarListaFacturas();
+    if (facturas) {
+
+        for (var i = 0; i < facturas.facturas.length; i++) {
+            var botones = '<form action="Control_Fac_List" method="POST"><input type="submit" name=verPdf_'
+                    + i + ' value="Ver PDF"></form></td><td><form action="Control_XML" method="POST"><input type="submit" name=verXML_' +
+                    i + ' value="Ver XML"></form></td> ';
+            id = facturas.facturas[i].id;
+            dni = facturas.facturas[i].cliente.dni;
+            name = facturas.facturas[i].cliente.name;
+            c = facturas.facturas[0].productos[0].cantidad;
+            total = 0;
+
+            $("#tabla_list_facturas").append('<tr><td>' + id + '</td><td>'
+                    + dni + '</td><td>' + name +
+                    '</td><td>' + botones + '</td></tr>');
 
 
+        }
+    } else
+    {
+        console.log("lista de facturas vacia");
     }
-
 }());
 
 var cargarPerfilUsuario = (function () {
