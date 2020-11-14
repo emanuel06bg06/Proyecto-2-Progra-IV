@@ -60,18 +60,18 @@
                             </tr>												
                         </tbody>
                     </table>
-                    <table border="1">
+                    <table class="table">
                         <%
                             ListProduct productos = factura.getProductos();
                         %>
-                        <thead>
+                        <thead class="thead-dark">
                             <tr>
-                                <th>Categoria</th> &nbsp
-                                <th>Detalle</th> &nbsp
-                                <th>Precio</th> &nbsp							 
-                                <th>I.V.A.</th> &nbsp
-                                <th>Cantidad</th> &nbsp
-                                <th>Total</th> &nbsp
+                                <th scope="col">Categoria</th> &nbsp
+                                <th scope="col">Detalle</th> &nbsp
+                                <th scope="col">Precio</th> &nbsp							 
+                                <th scope="col">I.V.A.</th> &nbsp
+                                <th scope="col">Cantidad</th> &nbsp
+                                <th scope="col">Total</th> &nbsp
                             </tr>
                         </thead>
                         <tbody>
@@ -90,7 +90,7 @@
                                 %>
                                 <td><%= productos.get(i).getTotal()%></td>
                                 <td>
-                                    <input type="submit" name="delete_<%= i%>" value="Eliminar">
+                                    <input type="submit" class="btn btn-secondary"  name="delete_<%= i%>" value="Eliminar">
                                 </td>
                             </tr>
                             <%
@@ -105,9 +105,9 @@
                 </form>
 
                 <form action="Control_Facturar" method="GET">
-                    <input type="submit" name="btn_next" value="Ingresar otro producto">
-                    <input type="submit" name="btn_next" value="Ver PDF">
-                    <input type="submit" name="btn_next" value="Guardar Factura">
+                    <input type="submit" class="btn btn-secondary" name="btn_next" value="Ingresar otro producto">
+                    <input type="submit" class="btn btn-secondary" name="btn_next" value="Ver PDF">
+                    <input type="submit" class="btn btn-secondary" name="btn_next" value="Guardar Factura">
                 </form>            
                 <a href="view_principal.jsp">Volver al inicio</a>			
             </div>

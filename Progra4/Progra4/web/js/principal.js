@@ -478,8 +478,8 @@ var mostrarListaF = (function () {
     if (facturas) {
 
         for (var i = 0; i < facturas.facturas.length; i++) {
-            var botones = '<form action="Control_Fac_List" method="POST"><input type="submit" name=verPdf_'
-                    + i + ' value="Ver PDF"></form></td><td><form action="Control_XML" method="POST"><input type="submit" name=verXML_' +
+            var botones = '<form action="Control_Fac_List" method="POST"><input type="submit"  class="btn btn-secondary" name=verPdf_'
+                    + i + ' value="Ver PDF"></form></td><td><form action="Control_XML" method="POST"><input type="submit" class="btn btn-secondary" name=verXML_' +
                     i + ' value="Ver XML"></form></td> ';
             id = facturas.facturas[i].id;
             dni = facturas.facturas[i].cliente.dni;
